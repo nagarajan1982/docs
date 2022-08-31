@@ -1,0 +1,111 @@
+{
+	"info": {
+		"_postman_id": "d9fe5f3d-91f7-41b0-88fb-0478fbaaf17e",
+		"name": "Withdrawal & Reversal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Withdrawal",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{subKey}}",
+						"type": "text"
+					},
+					{
+						"key": "x-correlation-id",
+						"value": "39836fe8-9302-46da-b5f1-66e393dcc628",
+						"type": "text"
+					},
+					{
+						"key": "depositAccountId",
+						"value": "9442109214",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"txnHeader\": {\n            \"x-txn-code\": \"LTF01\",\n            \"x-txn-ref\": \"TXN2608210000003\"\n        },\n        \"txnInstruction\": {\n            \"amount\": 1,\n            \"externalId\": \"PFTS2608210123403\",\n            \"notes\": \"\",\n            \"paymentDetails\": {\n                \"creditor\": {\n                    \"name\": \"Test ENB\"\n                },\n                \"creditorAccount\": {\n                    \"currency\": \"\",\n                    \"identification\": {\n                        \"iban\": \"\",\n                        \"other\": {\n                            \"identification\": \"\",\n                            \"scheme\": \"\"\n                        }\n                    }\n                },\n                \"creditorAgent\": {\n                    \"financialInstitutionIdentification\": {\n                        \"bic\": \"\"\n                    }\n                },\n                \"debtor\": {\n                    \"name\": \"\"\n                },\n                \"debtorAccount\": {\n                    \"currency\": \"\",\n                    \"identification\": {\n                        \"iban\": \"\",\n                        \"other\": {\n                            \"identification\": \"\",\n                            \"scheme\": \"\"\n                        }\n                    }\n                },\n                \"debtorAgent\": {\n                    \"financialInstitutionIdentification\": {\n                        \"bic\": \"\"\n                    }\n                },\n                \"paymentIdentification\": {\n                    \"endToEndIdentification\": \"\",\n                    \"instructionIdentification\": \"\",\n                    \"transactionIdentification\": \"\"\n                },\n                \"paymentTypeInformation\": {\n                    \"serviceLevel\": {\n                        \"code\": \"\"\n                    }\n                },\n                \"remittanceInformation\": {\n                    \"structured\": {\n                        \"creditorReferenceInformation\": {\n                            \"reference\": \"\",\n                            \"referenceIssuer\": \"\",\n                            \"referenceType\": \"\"\n                        }\n                    },\n                    \"unstructured\": \"\"\n                }\n            },\n            \"paymentOrderId\": \"\",\n            \"transactionDetails\": {\n                \"transactionChannelId\": \"LT_Outward\",\n                \"transactionChannelKey\": \"8afbb0ee79a7bc160179ad5266ec001d\"\n            },\n            \"valueDate\": \"2021-08-26T12:00:00+04:00\"\n        }\n    }\n]\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{apimHost}}/{{env}}/transfers/local/account-withdrawal-service/makeWithdrawal",
+					"protocol": "https",
+					"host": [
+						"{{apimHost}}"
+					],
+					"path": [
+						"{{env}}",
+						"transfers",
+						"local",
+						"account-withdrawal-service",
+						"makeWithdrawal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reversal",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "depositAccountId",
+						"value": "122",
+						"type": "text"
+					},
+					{
+						"key": "x-correlation-id",
+						"value": "8ead93b0-b267-11eb-8529-0242ac130003",
+						"type": "text"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{subKey}}",
+						"type": "text"
+					},
+					{
+						"key": "Host",
+						"value": "apim.dev.neobank-internal.ae",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n {\n    \"depositTransactionId\": \"68482\",\n    \"notes\": \"some notes, for example, the reason for adjustment\"\n  }\n]\t",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{apimHost}}/{{env}}/transfers/local/account-reversal-service/account/deposit/reversal",
+					"protocol": "https",
+					"host": [
+						"{{apimHost}}"
+					],
+					"path": [
+						"{{env}}",
+						"transfers",
+						"local",
+						"account-reversal-service",
+						"account",
+						"deposit",
+						"reversal"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

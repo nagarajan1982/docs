@@ -1,0 +1,1020 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2636
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 Courier-Bold;\f1\fmodern\fcharset0 Courier;\f2\fmodern\fcharset0 Courier-Oblique;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue109;\red15\green112\blue3;\red109\green109\blue109;
+}
+{\*\expandedcolortbl;;\csgenericrgb\c0\c0\c42745;\csgenericrgb\c5882\c43922\c1176;\csgenericrgb\c42745\c42745\c42745;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww19180\viewh14560\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\b\fs26 \cf2 info
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 app
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 name
+\f1\b0 \cf0 : 
+\f0\b \cf3 "@project.name@"\
+    \cf2 description
+\f1\b0 \cf0 : 
+\f0\b \cf3 "@project.description@"\
+    \cf2 version
+\f1\b0 \cf0 : 
+\f0\b \cf3 "@project.version@"\
+\
+\cf2 service
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 name
+\f1\b0 \cf0 : outward-payment-service\
+  
+\f0\b \cf2 version
+\f1\b0 \cf0 : 0.0.1\
+  
+\f0\b \cf2 circuit-breaker
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 outward-payment-service-ccn-received
+\f1\b0 \cf0 : $\{MONITOR_CIRCUIT\}\
+    
+\f0\b \cf2 outward-payment-service-internal-payment-initiated
+\f1\b0 \cf0 : $\{CRM_INDIVIDUAL_CIRCUIT\}, $\{DEVICE_MANAGEMENT_CIRCUIT\}\
+    
+\f0\b \cf2 outward-payment-service-payment-initiated
+\f1\b0 \cf0 : $\{CRM_INDIVIDUAL_CIRCUIT\}, $\{DEVICE_MANAGEMENT_CIRCUIT\}\
+    
+\f0\b \cf2 outward-payment-service-posting-success
+\f1\b0 \cf0 : $\{CRM_INDIVIDUAL_CIRCUIT\}, $\{DEVICE_MANAGEMENT_CIRCUIT\}, $\{ODS_CIRCUIT\}\
+    
+\f0\b \cf2 outward-payment-service-payment-reInitiated
+\f1\b0 \cf0 : $\{UNITY_CIRCUIT\}\
+    
+\f0\b \cf2 outward-payment-service-transaction-reversed
+\f1\b0 \cf0 : $\{CRM_INDIVIDUAL_CIRCUIT\}, $\{DEVICE_MANAGEMENT_CIRCUIT\}\
+\
+
+\f0\b \cf2 server
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 port
+\f1\b0 \cf0 : 9090\
+\
+
+\f2\i \cf4 ############# REST TEMPLATE PROPERTIES #############\
+
+\f0\i0\b \cf2 timeout
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 connect
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 rest
+\f1\b0 \cf0 : 20000\
+  
+\f0\b \cf2 read
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 rest
+\f1\b0 \cf0 : 20000\
+\
+
+\f2\i \cf4 ############# LOG #############\
+\
+
+\f0\i0\b \cf2 logging
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 file
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 path
+\f1\b0 \cf0 : .\
+    
+\f0\b \cf2 name
+\f1\b0 \cf0 : initiate-local-transfer.log\
+\
+
+\f2\i \cf4 ############# UNITY #############\
+
+\f0\i0\b \cf2 unity-single-customer-url
+\f1\b0 \cf0 : https://apim.nonprod.neobank-internal.ae/egress/test/unity/transfer/api/FinRequest/SingleCustTransfer\
+
+\f0\b \cf2 unityUserName
+\f1\b0 \cf0 : 18944bd5-e3ec-42b8-a199-40e3a01a522f\
+
+\f0\b \cf2 unityPassword
+\f1\b0 \cf0 : 14mwDc~efPjGtus-3to42.i7Bndq6~.7jS\
+
+\f2\i \cf4 ############# KAFKA ######################\
+
+\f0\i0\b \cf2 spring
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 profiles
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 active
+\f1\b0 \cf0 : $\{DEPLOY_ENV:test\}\
+  
+\f0\b \cf2 kafka
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 producer
+\f1\b0 \cf0 :\
+      
+\f0\b \cf2 bootstrap-servers
+\f1\b0 \cf0 : $\{SPRING_KAFKA_BOOTSTRAP-SERVERS:localhost:9092\}\
+      
+\f0\b \cf2 key-serializer
+\f1\b0 \cf0 : org.apache.kafka.common.serialization.StringSerializer\
+      
+\f0\b \cf2 value-serializer
+\f1\b0 \cf0 : org.apache.kafka.common.serialization.StringSerializer\
+    
+\f0\b \cf2 consumer
+\f1\b0 \cf0 :\
+      
+\f0\b \cf2 group-id
+\f1\b0 \cf0 : outward-payment-service\
+      
+\f0\b \cf2 bootstrap-servers
+\f1\b0 \cf0 : $\{SPRING_KAFKA_BOOTSTRAP-SERVERS:localhost:9092\}\
+      
+\f0\b \cf2 key-serializer
+\f1\b0 \cf0 : org.apache.kafka.common.serialization.StringSerializer\
+      
+\f0\b \cf2 value-serializer
+\f1\b0 \cf0 : org.apache.kafka.common.serialization.StringSerializer\
+    
+\f0\b \cf2 common
+\f1\b0 \cf0 :\
+      
+\f0\b \cf2 error-handlling-method
+\f1\b0 \cf0 : stop-the-world-except-for-specific\
+      
+\f0\b \cf2 maxAttempts
+\f1\b0 \cf0 : 3\
+      
+\f0\b \cf2 neverRetryExceptions
+\f1\b0 \cf0 :\
+        - java.lang.NullPointerException\
+        - javax.validation.ConstraintViolationException\
+        - com.fasterxml.jackson.core.JsonProcessingException\
+        - com.neobank.api.organization.exception.EventMappingException\
+        - org.springframework.web.client.HttpClientErrorException.NotFound\
+        - org.springframework.web.client.HttpClientErrorException.BadRequest\
+        - org.springframework.web.client.HttpClientErrorException.Unauthorized\
+        - com.neobank.common.exception.NeobankApiClientException\
+      
+\f0\b \cf2 defaultDlt
+\f1\b0 \cf0 : uaenorth_local_transfer_outward_payment_dlq_v1\
+      
+\f0\b \cf2 dltEnabled
+\f1\b0 \cf0 : true\
+      
+\f0\b \cf2 backOffPeriod
+\f1\b0 \cf0 : 1000\
+\
+
+\f0\b \cf2 kafka
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 consumer-topic
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 posting-success
+\f1\b0 \cf0 : uaenorth_local_transfer_outward_payment_posting_successful_raw_v1\
+    
+\f0\b \cf2 posting-failure
+\f1\b0 \cf0 : uaenorth_local_transfer_outward_payment_posting_failure_raw_v1\
+    
+\f0\b \cf2 return-received
+\f1\b0 \cf0 : uaenorth_local_transfer_outward_payment_return_received_raw_v1\
+    
+\f0\b \cf2 ccn-received
+\f1\b0 \cf0 : uaenorth_local_transfer_outward_payment_ccn_received_raw_v1\
+    
+\f0\b \cf2 ack-received
+\f1\b0 \cf0 : uaenorth_local_transfer_outward_payment_ack_received_raw_v1\
+    
+\f0\b \cf2 transaction-reversed
+\f1\b0 \cf0 : uaenorth_local_transfer_outward_payment_txn_reversed_raw_v1\
+    
+\f0\b \cf2 payment-reInitiated
+\f1\b0 \cf0 : uaenorth_local_transfer_outward_payment_re_initiate_raw_v1\
+    
+\f0\b \cf2 payment-initiated
+\f1\b0 \cf0 : uaenorth_local_transfer_outward_payment_initiated_raw_v1\
+    
+\f0\b \cf2 internal-payment-initiated
+\f1\b0 \cf0 : uaenorth_local_internal_transfer_outward_payment_initiated_raw_v1\
+  
+\f0\b \cf2 producer-topic
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 notification-generated
+\f1\b0 \cf0 : uaenorth_customer_notification_generated_raw_v1\
+    
+\f0\b \cf2 payment-requested
+\f1\b0 \cf0 : uaenorth_local_transfer_outward_payment_requested_raw_v1\
+    
+\f0\b \cf2 payment-initiated
+\f1\b0 \cf0 : uaenorth_local_transfer_outward_payment_initiated_raw_v1\
+    
+\f0\b \cf2 update-beneficiary
+\f1\b0 \cf0 : uaenorth_local_transfer_outward_payment_beneficiary_update_raw_v1\
+    
+\f0\b \cf2 internal-payment-requested
+\f1\b0 \cf0 : uaenorth_local_internal_transfer_outward_payment_requested_raw_v1\
+    
+\f0\b \cf2 internal-payment-initiated
+\f1\b0 \cf0 : uaenorth_local_internal_transfer_outward_payment_initiated_raw_v1\
+    
+\f0\b \cf2 internal-payment-inward
+\f1\b0 \cf0 : uaenorth_local_internal_transfer_inward_payment_posting_successful_raw_v1\
+    
+\f0\b \cf2 screening-initiated
+\f1\b0 \cf0 : uaenorth_local_transfer_outward_payment_screening_initiated_raw_v1\
+  
+\f0\b \cf2 topic
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 producer
+\f1\b0 \cf0 :\
+      
+\f0\b \cf2 notification
+\f1\b0 \cf0 : uaenorth_customer_notification_generated_raw_v1\
+\
+  
+\f2\i \cf4 #Notification messages\
+  
+\f0\i0\b \cf2 notification.message
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 posting-success
+\f1\b0 \cf0 : 
+\f0\b \cf3 "\{0\} \{1\} has been deducted from your account \{2\} for issuance of Local transfer transaction ref no. \{3\}."\
+    \cf2 posting-failure
+\f1\b0 \cf0 : 
+\f0\b \cf3 "Your transaction ref no. \{0\} was unsuccessful due to \{1\}."\
+    \cf2 ccn-received
+\f1\b0 \cf0 : 
+\f0\b \cf3 "Transaction with transaction ref no. \{0\} was credited successfully to the \{1\} with account no \{2\} for \{3\} \{4\} amount."\
+    \cf2 transaction-reversed
+\f1\b0 \cf0 : 
+\f0\b \cf3 "Transaction ref no. \{0\} was not credited to the beneficiary \{1\} due to the \{2\}. Your account has been credited with \{3\} \{4\} amount."\
+\
+
+\f2\i\b0 \cf4 #PaymentInitiated properties\
+
+\f0\i0\b \cf2 event.header
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 schema-version
+\f1\b0 \cf0 : v0.1\
+  
+\f0\b \cf2 event-name
+\f1\b0 \cf0 : LocalOutwardPaymentInitiated\
+  
+\f0\b \cf2 event-name-requested
+\f1\b0 \cf0 : LocalOutwardPaymentRequested\
+  
+\f0\b \cf2 internal-event-name
+\f1\b0 \cf0 : LocalOutwardInternalPaymentInitiated\
+  
+\f0\b \cf2 internal-event-name-requested
+\f1\b0 \cf0 : LocalOutwardInternalPaymentRequested\
+  
+\f0\b \cf2 internal-inward-event-name
+\f1\b0 \cf0 : LocalInwardInternalPaymentSuccess\
+  
+\f0\b \cf2 benf-event-name
+\f1\b0 \cf0 : UpdateBeneficiary\
+  
+\f0\b \cf2 workflow-id
+\f1\b0 \cf0 : workflow1\
+  
+\f0\b \cf2 source-name
+\f1\b0 \cf0 : LocalOutwardPaymentService\
+  
+\f0\b \cf2 additional-info
+\f1\b0 \cf0 : Initiates the payment and publish payment data for screening\
+  
+\f0\b \cf2 additional-info-request
+\f1\b0 \cf0 : Transfer data is ready for the screening\
+  
+\f0\b \cf2 internal-additional-info
+\f1\b0 \cf0 : Initiates the internal wio payment and publish the payment data\
+  
+\f0\b \cf2 internal-additional-info-request
+\f1\b0 \cf0 : Transfer data is ready for the internal wio payment\
+  
+\f0\b \cf2 internal-inward-additional-info
+\f1\b0 \cf0 : Internal wio payment successfull and publish the inward data\
+  
+\f0\b \cf2 benf-additional-info
+\f1\b0 \cf0 : Update Beneficiary\
+  
+\f0\b \cf2 environment
+\f1\b0 \cf0 : $\{DEPLOY_ENV:test\}\
+\
+
+\f2\i \cf4 #Screening hit response\
+
+\f0\i0\b \cf2 screening
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 hit
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 message
+\f1\b0 \cf0 : Screening Failed! Our representative will contact you.\
+  
+\f0\b \cf2 api
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 url
+\f1\b0 \cf0 : http://app-transfer-common-screening-service-java-ms.aks.test.neobank-internal.ae:80/api/v1/transactions/screening\
+\
+
+\f0\b \cf2 monitoring
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 api
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 url
+\f1\b0 \cf0 : http://app-transfer-common-screening-service-java-ms.aks.test.neobank-internal.ae:80/api/v1/transactions/monitoring\
+\
+
+\f0\b \cf2 internal
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 payment
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 api
+\f1\b0 \cf0 :\
+      
+\f0\b \cf2 url
+\f1\b0 \cf0 : http://app-account-payment-service-java-ms.aks.test.neobank-internal.ae:80/api/v1/internal/wio-transfer\
+\
+\
+\
+
+\f2\i \cf4 #data for initiate local transfer\
+
+\f0\i0\b \cf2 transferdetail.header
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 channel
+\f1\b0 \cf0 : IB\
+  
+\f0\b \cf2 sender
+\f1\b0 \cf0 : WIOBAEADXXX\
+  
+\f0\b \cf2 txn-reference-prefix
+\f1\b0 \cf0 : L  
+\f2\i \cf4 # when this prefix is changed make sure to change LOCAL_TSF_TXN_ID_PREFIX in "screening-service" as well\
+  
+\f0\i0\b \cf2 channel-reference-prefix
+\f1\b0 \cf0 : REF_\
+
+\f0\b \cf2 transferDetail.data
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 customer-id
+\f1\b0 \cf0 : 410316190\
+  
+\f0\b \cf2 currency
+\f1\b0 \cf0 : AED\
+  
+\f0\b \cf2 sme-ord-cust-type
+\f1\b0 \cf0 : 1200\
+  
+\f0\b \cf2 freelancer-ord-cust-type
+\f1\b0 \cf0 : 1100\
+  
+\f0\b \cf2 charge-type
+\f1\b0 \cf0 : SHA\
+  
+\f0\b \cf2 fts-service-type
+\f1\b0 \cf0 : FTS\
+  
+\f0\b \cf2 ipi-service-type
+\f1\b0 \cf0 : IPI\
+  
+\f0\b \cf2 benef-bank-city
+\f1\b0 \cf0 : Abu Dhabi\
+  
+\f0\b \cf2 benef-bank-country
+\f1\b0 \cf0 : UAE\
+  
+\f0\b \cf2 service-type-fts-limit
+\f1\b0 \cf0 : 25000\
+  
+\f0\b \cf2 ordcustomer
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 address-line1
+\f1\b0 \cf0 : ABC Corporation Type1\
+    
+\f0\b \cf2 addressl-ine3
+\f1\b0 \cf0 : Abu Dhabi\
+    
+\f0\b \cf2 address-line4
+\f1\b0 \cf0 : UAE\
+  
+\f0\b \cf2 ordinstitution
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 line1
+\f1\b0 \cf0 : ABIXXX,AL Masraf Bank\
+    
+\f0\b \cf2 line3
+\f1\b0 \cf0 : Abu Dhabi\
+    
+\f0\b \cf2 line4
+\f1\b0 \cf0 : UAE\
+  
+\f0\b \cf2 benfcustomer
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 address-line1
+\f1\b0 \cf0 : Shiji, Street 3\
+    
+\f0\b \cf2 address-line3
+\f1\b0 \cf0 : Abu Dhabi\
+    
+\f0\b \cf2 address-line4
+\f1\b0 \cf0 : UAE\
+\
+
+\f2\i \cf4 #mambu configuration details:\
+
+\f0\i0\b \cf2 mambu-url
+\f1\b0 \cf0 : https://apim.nonprod.neobank-internal.ae/egress/test/mambu/api/deposits\
+
+\f2\i \cf4 #mambu configuration details:\
+
+\f0\i0\b \cf2 mambu-local-transfers-username
+\f1\b0 \cf0 : LocalTransfers\
+
+\f0\b \cf2 mambu-local-transfers-password
+\f1\b0 \cf0 : 3kf93kfh840kld8\
+\
+
+\f2\i \cf4 #azure keyvault properties\
+
+\f0\i0\b \cf2 azure.keyvault
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 enabled
+\f1\b0 \cf0 : false\
+  
+\f0\b \cf2 uri
+\f1\b0 \cf0 : $\{APP_KV_SHARED_URI\}\
+  
+\f0\b \cf2 client-id
+\f1\b0 \cf0 : $\{APP_KV_SHARED_CLIENT_ID\}\
+  
+\f0\b \cf2 client-key
+\f1\b0 \cf0 : $\{APP_KV_SHARED_CLIENT_KEY\}\
+  
+\f0\b \cf2 tenant-id
+\f1\b0 \cf0 : $\{APP_KV_SHARED_TENANT_ID\}\
+  
+\f0\b \cf2 case-sensitive-keys
+\f1\b0 \cf0 : true\
+
+\f2\i \cf4 #Notifications header details:\
+
+\f0\i0\b \cf2 header
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 environment
+\f1\b0 \cf0 : $\{DEPLOY_ENV:test\}\
+  
+\f0\b \cf2 source
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 name
+\f1\b0 \cf0 : Mobile\
+\
+
+\f0\b \cf2 device
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 management
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 service
+\f1\b0 \cf0 :\
+      
+\f0\b \cf2 two-fa-endpoint
+\f1\b0 \cf0 : http://app-common-services-two-fa-service-java-ms.aks.test.neobank-internal.ae:80/api/v1/twofa/validate\
+      
+\f0\b \cf2 two-fa-enabled
+\f1\b0 \cf0 : false\
+      
+\f0\b \cf2 device-check-endpoint
+\f1\b0 \cf0 : http://app-common-services-two-fa-service-java-ms.aks.test.neobank-internal.ae:80/api/v1/device/check-status\
+      
+\f0\b \cf2 device-check-enabled
+\f1\b0 \cf0 : false\
+\
+
+\f0\b \cf2 limit
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 check
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 endpoint
+\f1\b0 \cf0 : http://app-transfer-common-limit-check-service-java-ms.aks.test.neobank-internal.ae:80/api/v1/transfer/common/limit/checkTransactionAmount\
+\
+
+\f0\b \cf2 customer
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 service
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 business
+\f1\b0 \cf0 :\
+      
+\f0\b \cf2 endpoint
+\f1\b0 \cf0 : http://app-customer-servicing-business-management-service-java-ms.aks.test.neobank-internal.ae:80/api/v1/customer/business/search\
+      
+\f0\b \cf2 account
+\f1\b0 \cf0 : http://app-customer-servicing-business-management-service-java-ms.aks.test.neobank-internal.ae:80/api/v1/customer/business/account\
+    
+\f0\b \cf2 individual
+\f1\b0 \cf0 :\
+      
+\f0\b \cf2 endpoint
+\f1\b0 \cf0 : http://app-customer-servicing-individual-management-service-java-ms.aks.test.neobank-internal.ae:80/api/v1/customer/individual/search\
+\
+
+\f0\b \cf2 beneficiary
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 service
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 endpoint
+\f1\b0 \cf0 : http://common-data-platform-apis-beneficiary-service-java-ms.aks.test.neobank-internal.ae:80/beneficiary\
+    
+\f0\b \cf2 enabled
+\f1\b0 \cf0 : true\
+\
+
+\f0\b \cf2 data
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 platform
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 transaction
+\f1\b0 \cf0 :\
+      
+\f0\b \cf2 details
+\f1\b0 \cf0 :\
+        
+\f0\b \cf2 endpoint
+\f1\b0 \cf0 : http://common-data-platform-apis-local-transfer-service-java-ms.aks.test.neobank-internal.ae:80/payments_local_transfer/transaction?txnReference=\
+    
+\f0\b \cf2 device
+\f1\b0 \cf0 :\
+      
+\f0\b \cf2 info
+\f1\b0 \cf0 :\
+        
+\f0\b \cf2 endpoint
+\f1\b0 \cf0 : http://app-security-device-management-service-java-ms.aks.test.neobank-internal.ae:80/api/v1/device\
+\
+
+\f0\b \cf2 scheduler
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 service
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 endpoint
+\f1\b0 \cf0 : http://app-common-services-scheduler-service-java-ms.aks.test.neobank-internal.ae:80/api/v1/job/schedule/payment/initiate\
+
+\f0\b \cf2 spring.kafka.common
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 neverRetryExceptions
+\f1\b0 \cf0 :\
+    - java.lang.UnsupportedOperationException\
+    - java.lang.NullPointerException\
+    - com.fasterxml.jackson.core.JsonParseException\
+    - com.fasterxml.jackson.core.JsonProcessingException\
+    - com.neobank.transfer.local.outward.payment.exceptions.OutwardPaymentException\
+  
+\f0\b \cf2 retriesBeforeDlt
+\f1\b0 \cf0 : 3\
+  
+\f0\b \cf2 defaultDlt
+\f1\b0 \cf0 : uaenorth_local_transfer_outward_payment_dlq_v1\
+  
+\f0\b \cf2 dltEnabled
+\f1\b0 \cf0 : true\
+  
+\f0\b \cf2 backOffPeriod
+\f1\b0 \cf0 : 3000\
+\
+
+\f2\i \cf4 ############# NOTIFICATION TEMPLATE #############\
+
+\f0\i0\b \cf2 notification
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 templates
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 posting-success-email-template-id
+\f1\b0 \cf0 : $\{POSTING_SUCCESS_EMAIL_TEMPLATE_ID\}\
+    
+\f0\b \cf2 payment-initiated-email-template-id
+\f1\b0 \cf0 : $\{PAYMENT_INITIATED_EMAIL_TEMPLATE_ID\}\
+    
+\f0\b \cf2 transaction-reversed-email-template-id
+\f1\b0 \cf0 : $\{TRANSACTION_REVERSED_EMAIL_TEMPLATE_ID\}\
+    
+\f0\b \cf2 posting-success-sms-template-id
+\f1\b0 \cf0 : $\{POSTING_SUCCESS_SMS_TEMPLATE_ID\}\
+    
+\f0\b \cf2 payment-initiated-sms-template-id
+\f1\b0 \cf0 : $\{PAYMENT_INITIATED_SMS_TEMPLATE_ID\}\
+    
+\f0\b \cf2 transaction-reversed-sms-template-id
+\f1\b0 \cf0 : $\{TRANSACTION_REVERSED_SMS_TEMPLATE_ID\}\
+    
+\f0\b \cf2 posting-success-device-template-id
+\f1\b0 \cf0 : $\{POSTING_SUCCESS_DEVICE_TEMPLATE_ID\}\
+    
+\f0\b \cf2 transaction-reversed-device-template-id
+\f1\b0 \cf0 : $\{TRANSACTION_REVERSED_DEVICE_TEMPLATE_ID\}\
+    
+\f0\b \cf2 payment-initiated-device-template-id
+\f1\b0 \cf0 : $\{PAYMENT_INITIATED_DEVICE_TEMPLATE_ID\}\
+    
+\f0\b \cf2 internal-payment-initiated-email-template-id
+\f1\b0 \cf0 : $\{INTERNAL_PAYMENT_INITIATED_EMAIL_TEMPLATE_ID\}\
+    
+\f0\b \cf2 internal-payment-initiated-sms-template-id
+\f1\b0 \cf0 : $\{INTERNAL_PAYMENT_INITIATED_SMS_TEMPLATE_ID\}\
+    
+\f0\b \cf2 internal-payment-initiated-device-template-id
+\f1\b0 \cf0 : $\{INTERNAL_PAYMENT_INITIATED_DEVICE_TEMPLATE_ID\}\
+    
+\f0\b \cf2 posting-success-email
+\f1\b0 \cf0 : true\
+    
+\f0\b \cf2 transaction-reversed-email
+\f1\b0 \cf0 : true\
+    
+\f0\b \cf2 posting-success-sms
+\f1\b0 \cf0 : true\
+    
+\f0\b \cf2 transaction-reversed-sms
+\f1\b0 \cf0 : true\
+    
+\f0\b \cf2 posting-success-device
+\f1\b0 \cf0 : false\
+    
+\f0\b \cf2 transaction-reversed-device
+\f1\b0 \cf0 : false\
+    
+\f0\b \cf2 internal-payment-initiated-success-device
+\f1\b0 \cf0 : true\
+    
+\f0\b \cf2 internal-payment-initiated-success-sms
+\f1\b0 \cf0 : true\
+    
+\f0\b \cf2 internal-payment-initiated-success-email
+\f1\b0 \cf0 : true\
+    
+\f0\b \cf2 payment-initiated-success-email
+\f1\b0 \cf0 : true\
+    
+\f0\b \cf2 payment-initiated-success-sms
+\f1\b0 \cf0 : false\
+    
+\f0\b \cf2 payment-initiated-success-device
+\f1\b0 \cf0 : false\
+\
+
+\f2\i \cf4 ###### Enabling Health Probe ######\
+\
+
+\f0\i0\b \cf2 management
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 endpoint
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 prometheus
+\f1\b0 \cf0 :\
+      
+\f0\b \cf2 enabled
+\f1\b0 \cf0 : true\
+  
+\f0\b \cf2 endpoints
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 web
+\f1\b0 \cf0 :\
+      
+\f0\b \cf2 exposure
+\f1\b0 \cf0 :\
+        
+\f0\b \cf2 include
+\f1\b0 \cf0 :\
+          - health\
+          - info\
+          - prometheus\
+      
+\f0\b \cf2 base-path
+\f1\b0 \cf0 : /\
+      
+\f0\b \cf2 path-mapping
+\f1\b0 \cf0 :\
+        
+\f0\b \cf2 prometheus
+\f1\b0 \cf0 : /metrics\
+\
+\
+
+\f0\b \cf2 association
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 entity
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 type
+\f1\b0 \cf0 : Authorized Individual\
+\
+
+\f0\b \cf2 ae
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 wio
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 security
+\f1\b0 \cf0 :\
+      
+\f0\b \cf2 authorization
+\f1\b0 \cf0 :\
+        
+\f0\b \cf2 disabled
+\f1\b0 \cf0 :\
+          
+\f0\b \cf2 get
+\f1\b0 \cf0 :\
+            - /health\
+            - /info\
+            - /prometheus\
+            - /metrics\
+\
+
+\f0\b \cf2 unity
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 product
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 code
+\f1\b0 \cf0 : FTS\
+  
+\f0\b \cf2 value
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 date
+\f1\b0 \cf0 :\
+      
+\f0\b \cf2 api
+\f1\b0 \cf0 :\
+        
+\f0\b \cf2 endpoint
+\f1\b0 \cf0 : https://apim.nonprod.neobank-internal.ae/egress/test/unity/transfer/api/GetValueDate\
+\
+
+\f2\i \cf4 # Azure metrics\
+
+\f0\i0\b \cf2 azure.application-insights.instrumentation-key
+\f1\b0 \cf0 : $\{AZURE_APP_INSIGHTS_INSTRUMENTATION_KEY:7cadde63-ccec-4db9-b244-b8a6998ba430\}\
+\
+
+\f0\b \cf2 ocp-apim-subscription-key
+\f1\b0 \cf0 : 7ba0d57f0bb247639c0fdc49fbdcc393\
+
+\f2\i \cf4 ###### Circuit Breaker ######\
+
+\f0\i0\b \cf2 CRM_INDIVIDUAL_CIRCUIT
+\f1\b0 \cf0 : service-circuit-crm-individual\
+
+\f0\b \cf2 MONITOR_CIRCUIT
+\f1\b0 \cf0 : service-circuit-monitor\
+
+\f0\b \cf2 DEVICE_MANAGEMENT_CIRCUIT
+\f1\b0 \cf0 : service-circuit-device-management\
+
+\f0\b \cf2 ODS_CIRCUIT
+\f1\b0 \cf0 : service-circuit-ods\
+
+\f0\b \cf2 UNITY_CIRCUIT
+\f1\b0 \cf0 : service-circuit-unity\
+\
+
+\f0\b \cf2 resilience4j
+\f1\b0 \cf0 :\
+  
+\f0\b \cf2 circuitbreaker
+\f1\b0 \cf0 :\
+    
+\f0\b \cf2 instances
+\f1\b0 \cf0 :\
+      
+\f0\b \cf2 service-circuit-crm-individual
+\f1\b0 \cf0 :\
+        
+\f0\b \cf2 registerHealthIndicator
+\f1\b0 \cf0 : true\
+        
+\f0\b \cf2 failure-rate-threshold
+\f1\b0 \cf0 : 40.0f\
+        
+\f0\b \cf2 sliding-window-type
+\f1\b0 \cf0 : TIME_BASED\
+        
+\f0\b \cf2 sliding-window-size
+\f1\b0 \cf0 : 60\
+        
+\f0\b \cf2 minimum-number-of-calls
+\f1\b0 \cf0 : 3\
+        
+\f0\b \cf2 wait-duration-in-open-state
+\f1\b0 \cf0 : 180000\
+        
+\f0\b \cf2 automatic-transition-from-open-to-half-open-enabled
+\f1\b0 \cf0 : true\
+        
+\f0\b \cf2 record-exceptions
+\f1\b0 \cf0 :\
+          - org.springframework.web.client.HttpServerErrorException\
+          - org.springframework.web.client.ResourceAccessException\
+          - java.net.UnknownHostException\
+          - com.neobank.common.exception.ServiceNotAvailableException\
+          - com.neobank.common.exception.InvalidRequestException\
+          - com.neobank.common.exception.ResourceNotAvailableException\
+          - com.neobank.common.exception.ServiceAccessException\
+          - com.neobank.common.exception.NeobankApiRetryException\
+      
+\f0\b \cf2 service-circuit-monitor
+\f1\b0 \cf0 :\
+        
+\f0\b \cf2 registerHealthIndicator
+\f1\b0 \cf0 : true\
+        
+\f0\b \cf2 failure-rate-threshold
+\f1\b0 \cf0 : 40.0f\
+        
+\f0\b \cf2 sliding-window-type
+\f1\b0 \cf0 : TIME_BASED\
+        
+\f0\b \cf2 sliding-window-size
+\f1\b0 \cf0 : 60\
+        
+\f0\b \cf2 minimum-number-of-calls
+\f1\b0 \cf0 : 3\
+        
+\f0\b \cf2 wait-duration-in-open-state
+\f1\b0 \cf0 : 180000\
+        
+\f0\b \cf2 automatic-transition-from-open-to-half-open-enabled
+\f1\b0 \cf0 : true\
+        
+\f0\b \cf2 record-exceptions
+\f1\b0 \cf0 :\
+          - org.springframework.web.client.HttpServerErrorException\
+          - org.springframework.web.client.ResourceAccessException\
+          - java.net.UnknownHostException\
+          - com.neobank.common.exception.ServiceNotAvailableException\
+          - com.neobank.common.exception.InvalidRequestException\
+          - com.neobank.common.exception.ResourceNotAvailableException\
+          - com.neobank.common.exception.ServiceAccessException\
+          - com.neobank.common.exception.NeobankApiRetryException\
+      
+\f0\b \cf2 service-circuit-device-management
+\f1\b0 \cf0 :\
+        
+\f0\b \cf2 registerHealthIndicator
+\f1\b0 \cf0 : true\
+        
+\f0\b \cf2 failure-rate-threshold
+\f1\b0 \cf0 : 40.0f\
+        
+\f0\b \cf2 sliding-window-type
+\f1\b0 \cf0 : TIME_BASED\
+        
+\f0\b \cf2 sliding-window-size
+\f1\b0 \cf0 : 60\
+        
+\f0\b \cf2 minimum-number-of-calls
+\f1\b0 \cf0 : 3\
+        
+\f0\b \cf2 wait-duration-in-open-state
+\f1\b0 \cf0 : 180000\
+        
+\f0\b \cf2 automatic-transition-from-open-to-half-open-enabled
+\f1\b0 \cf0 : true\
+        
+\f0\b \cf2 record-exceptions
+\f1\b0 \cf0 :\
+          - org.springframework.web.client.HttpServerErrorException\
+          - org.springframework.web.client.ResourceAccessException\
+          - java.net.UnknownHostException\
+          - com.neobank.common.exception.ServiceNotAvailableException\
+          - com.neobank.common.exception.InvalidRequestException\
+          - com.neobank.common.exception.ResourceNotAvailableException\
+          - com.neobank.common.exception.ServiceAccessException\
+          - com.neobank.common.exception.NeobankApiRetryException\
+      
+\f0\b \cf2 service-circuit-ods
+\f1\b0 \cf0 :\
+        
+\f0\b \cf2 registerHealthIndicator
+\f1\b0 \cf0 : true\
+        
+\f0\b \cf2 failure-rate-threshold
+\f1\b0 \cf0 : 40.0f\
+        
+\f0\b \cf2 sliding-window-type
+\f1\b0 \cf0 : TIME_BASED\
+        
+\f0\b \cf2 sliding-window-size
+\f1\b0 \cf0 : 60\
+        
+\f0\b \cf2 minimum-number-of-calls
+\f1\b0 \cf0 : 3\
+        
+\f0\b \cf2 wait-duration-in-open-state
+\f1\b0 \cf0 : 180000\
+        
+\f0\b \cf2 automatic-transition-from-open-to-half-open-enabled
+\f1\b0 \cf0 : true\
+        
+\f0\b \cf2 record-exceptions
+\f1\b0 \cf0 :\
+          - org.springframework.web.client.HttpServerErrorException\
+          - org.springframework.web.client.ResourceAccessException\
+          - java.net.UnknownHostException\
+          - com.neobank.common.exception.ServiceNotAvailableException\
+          - com.neobank.common.exception.InvalidRequestException\
+          - com.neobank.common.exception.ResourceNotAvailableException\
+          - com.neobank.common.exception.ServiceAccessException\
+          - com.neobank.common.exception.NeobankApiRetryException\
+      
+\f0\b \cf2 service-circuit-unity
+\f1\b0 \cf0 :\
+        
+\f0\b \cf2 registerHealthIndicator
+\f1\b0 \cf0 : true\
+        
+\f0\b \cf2 failure-rate-threshold
+\f1\b0 \cf0 : 40.0f\
+        
+\f0\b \cf2 sliding-window-type
+\f1\b0 \cf0 : TIME_BASED\
+        
+\f0\b \cf2 sliding-window-size
+\f1\b0 \cf0 : 60\
+        
+\f0\b \cf2 minimum-number-of-calls
+\f1\b0 \cf0 : 3\
+        
+\f0\b \cf2 wait-duration-in-open-state
+\f1\b0 \cf0 : 180000\
+        
+\f0\b \cf2 automatic-transition-from-open-to-half-open-enabled
+\f1\b0 \cf0 : true\
+        
+\f0\b \cf2 record-exceptions
+\f1\b0 \cf0 :\
+          - org.springframework.web.client.HttpServerErrorException\
+          - org.springframework.web.client.ResourceAccessException\
+          - java.net.UnknownHostException\
+          - com.neobank.common.exception.ServiceNotAvailableException\
+          - com.neobank.common.exception.InvalidRequestException\
+          - com.neobank.common.exception.ResourceNotAvailableException\
+          - com.neobank.common.exception.ServiceAccessException\
+          - com.neobank.common.exception.NeobankApiRetryException\
+\
+}

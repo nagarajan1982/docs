@@ -1,0 +1,163 @@
+service:
+  name: outward-payment-service
+  version: 0.0.1
+
+server:
+  port: 9090
+
+############# REST TEMPLATE PROPERTIES #############
+timeout:
+  connect:
+    rest: 20000
+  read:
+    rest: 20000
+
+############# LOG #############
+
+logging:
+  file:
+    path: .
+    name: initiate-local-transfer.log
+
+############# UNITY #############
+#Injected through key vault. ToDO will be removed soon from the configurations
+unity-single-customer-url: ${APIM_URL/unity/fund-transfer-service/api/FinRequest/SingleCustTransfer:https://apim.nonprod.neobank-internal.ae/dev/unity/fund-transfer-service/api/FinRequest/SingleCustTransfer}
+unityUserName: 18944bd5-e3ec-42b8-a199-40e3a01a522f
+unityPassword: 14mwDc~efPjGtus-3to42.i7Bndq6~.7jS
+############# KAFKA ######################
+spring:
+  kafka:
+    producer:
+      bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP-SERVERS:localhost:9092}
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+kafka:
+  consumer-topic:
+    posting-success: uaenorth_local_transfer_outward_payment_posting_successful_raw_v1_mock
+    posting-failure: uaenorth_local_transfer_outward_payment_posting_failure_raw_v1_mock
+    return-received: uaenorth_local_transfer_outward_payment_return_received_raw_v1_mock
+    ccn-received: uaenorth_local_transfer_outward_payment_ccn_received_raw_v1_mock
+    ack-received: uaenorth_local_transfer_outward_payment_ack_received_raw_v1_mock
+    transaction-reversed: uaenorth_local_transfer_outward_payment_txn_reversed_raw_v1_mock
+    payment-reInitiated: uaenorth_local_transfer_outward_payment_re_initiate_raw_v1_mock
+  producer-topic:
+    notification-generated: uaenorth_customer_notification_generated_raw_v1_mock
+    payment-requested: uaenorth_local_transfer_outward_payment_requested_raw_v1_mock
+    payment-initiated: uaenorth_local_transfer_outward_payment_initiated_raw_v1_mock
+    update-beneficiary: uaenorth_local_transfer_outward_payment_beneficiary_update_raw_v1_mock
+
+  #Notification messages
+  notification.message:
+    posting-success: "{0} {1} has been deducted from your account {2} for issuance of Local transfer transaction ref no. {3}."
+    posting-failure: "Your transaction ref no. {0} was unsuccessful due to {1}."
+    ccn-received: "Transaction with transaction ref no. {0} was credited successfully to the {1} with account no {2} for {3} {4} amount."
+    transaction-reversed: "Transaction ref no. {0} was not credited to the beneficiary {1} due to the {2}. Your account has been credited with {3} {4} amount."
+
+#PaymentInitiated properties
+event.header:
+  schema-version: v0.1
+  event-name: LocalOutwardPaymentInitiated
+  event-name-requested: LocalOutwardPaymentRequested
+  benf-event-name: UpdateBeneficiary
+  workflow-id: workflow1
+  source-name: LocalOutwardPaymentService
+  additional-info: Initiates the payment and publish payment data for screening
+  additional-info-request: Transfer data is ready for the screening
+  benf-additional-info: Update Beneficiary
+  environment: ${DEPLOY_ENV:dev}
+
+#Screening hit response
+screening:
+  hit:
+    message: Screening Failed! Our representative will contact you.
+  api:
+    url: http://app-transfer-local-screening-service-java-ms.aks.dev.neobank-internal.ae:80/api/v1/transactions/screening
+
+monitoring:
+  api:
+    url: http://app-transfer-local-screening-service-java-ms.aks.dev.neobank-internal.ae:80/api/v1/transactions/monitoring
+
+
+
+#data for initiate local transfer
+transferdetail.header:
+  channel: IB
+  sender: E086AEXXXXX
+  txn-reference-prefix: L
+  channel-reference-prefix: REF_
+transferDetail.data:
+  customer-id: 410316190
+  currency: AED
+  ord-cust-type: 1100
+  charge-type: SHA
+  fts-service-type: FTS
+  ipi-service-type: IPI
+  benef-bank-city: Abu Dhabi
+  benef-bank-country: UAE
+  service-type-fts-limit: 25000
+  ordcustomer:
+    address-line1: ABC Corporation Type1
+    addressl-ine3: Abu Dhabi
+    address-line4: UAE
+  ordinstitution:
+    line1: ABIXXX,AL Masraf Bank
+    line3: Abu Dhabi
+    line4: UAE
+  benfcustomer:
+    address-line1: Shiji, Street 3
+    address-line3: Abu Dhabi
+    address-line4: UAE
+
+#mambu configuration details:
+#mambu-endpointUrl: https://wiodev.sandbox.mambu.com/api/deposits
+#mambu configuration details:
+mambu-local-transfers-username: rjain
+mambu-local-transfers-password: a1234567890
+mambu-url: ${APIM_URL/mambu/api/deposits:https://apim.nonprod.neobank-internal.ae/dev/mambu/api/deposits}
+#azure keyvault properties
+azure.keyvault:
+  enabled: false
+  uri: ${APP_KV_SHARED_URI}
+  client-id: ${APP_KV_SHARED_CLIENT_ID}
+  client-key: ${APP_KV_SHARED_CLIENT_KEY}
+  tenant-id: ${APP_KV_SHARED_TENANT_ID}
+  case-sensitive-keys: true
+#Notifications header details:
+header:
+  environment: ${DEPLOY_ENV:dev}
+  source:
+    name: Mobile
+
+device:
+  management:
+    service:
+      two-fa-endpoint: http://app-common-services-two-fa-service-java-ms.aks.dev.neobank-internal.ae:80/api/v1/twofa/validate
+      two-fa-enabled: true
+      device-check-endpoint: http://app-common-services-two-fa-service-java-ms.aks.dev.neobank-internal.ae:80/api/v1/device/check-status
+      device-check-enabled: true
+
+limit:
+  check:
+    endpoint: http://app-transfer-common-limit-check-service-java-ms.aks.dev.neobank-internal.ae:80/api/v1/transfer/common/limit/checkTransactionAmount
+
+customer:
+  service:
+    business:
+      endpoint: http://app-customer-servicing-business-management-service-java-ms.aks.dev.neobank-internal.ae:80/api/v1/customer/business/search
+
+beneficiary:
+  service:
+    endpoint: http://app-transfer-common-beneficiary-service-java-ms.aks.dev.neobank-internal.ae:80/api/v1/beneficiary
+    enabled: true
+
+spring.kafka.common:
+  neverRetryExceptions:
+    - java.lang.UnsupportedOperationException
+    - java.lang.NullPointerException
+    - com.fasterxml.jackson.core.JsonParseException
+    - com.fasterxml.jackson.core.JsonProcessingException
+    - com.neobank.transfer.local.outward.payment.exceptions.OutwardPaymentException
+  maxAttempts: 3
+  defaultDlt: uaenorth_local_transfer_outward_payment_dlq_v1
+  dltEnabled: true
+  backOffPeriod: 3000
